@@ -2,10 +2,9 @@ var key = "4699afd8fabd5888ac079efa9eff2bc3";
 var save = $("button");
 var input = $("input");
 var listSearch = [];
+var here = document.getElementById("recent-search");
 var oldList = JSON.parse(localStorage.getItem("recent"));
-if (oldList.length > 0) {
-  listSearch = oldList;
-}
+
 function recent() {
   var recentHistory = document.createElement("button");
   recentHistory.innerHTML = input.val();
@@ -29,9 +28,10 @@ function handleSearch(event) {
   var cityName = input.val();
   geoCoding(cityName);
   listSearch.push(cityName);
-  localStorage.setItem("recent", JSON.stringify(listSearch));
+  localStorage.setItem("recent:", JSON.stringify(listSearch));
   recent();
 }
+
 function geoCoding(cityName) {
   fetch(
     "http://api.openweathermap.org/geo/1.0/direct?q=+" +
@@ -45,7 +45,6 @@ function geoCoding(cityName) {
     }) // Convert data to json
     .then(function (data) {
       var location = data[0];
-      console.log(location);
       return location;
     })
 
@@ -64,7 +63,6 @@ function geoCoding(cityName) {
           return resp.json();
         })
         .then(function day(data) {
-          // console.log("DATA",data);
           todaysWeather(data.list[0]);
           weatherConditions(data.list[7]);
           for (i = 7; i < 40; i += 8) {
@@ -77,8 +75,6 @@ function geoCoding(cityName) {
           extractFifth(data);
         });
     });
-  //   var icon = data.list[i].weather.icon;
-  //   console.log("icon", icon);
 }
 
 today = document.getElementById("weather");
@@ -86,9 +82,8 @@ function todaysWeather(currentWeather) {
   today.innerHTML = "";
   var date = dayjs(currentWeather.dt_txt).format("MM/DD/YYYY");
   var windSpeed = currentWeather.wind.speed;
-  var temperature = currentWeather.main.temp;
-  var humidity = currentWeather.main.humidity;
-  console.log(currentWeather);
+  var temperature = currentWeather.main.temp + " °";
+  var humidity = currentWeather.main.humidity + " %";
   var icon = currentWeather.weather[0].icon;
   var dateToday = document.createElement("h5");
   var windEL = document.createElement("p");
@@ -111,12 +106,11 @@ var tomorrow = document.getElementById("1");
 function extractFirst(data) {
   tomorrow.innerHTML = "";
   var day = data.list[7];
-  console.log(day);
   var formatDate = dayjs(day.dt_txt).format("MM/DD/YYYY");
   var date = formatDate;
   var windSpeed = day.wind.speed;
-  var temperature = day.main.temp;
-  var humidity = day.main.humidity;
+  var temperature = day.main.temp + " °";
+  var humidity = day.main.humidity + " %";
   var icon = day.weather[0].icon;
   var dateFirst = document.createElement("h5");
   var windEl = document.createElement("p");
@@ -139,18 +133,23 @@ var dayTwo = document.getElementById("2");
 function extractSecond(data) {
   dayTwo.innerHTML = "";
   var day = data.list[15];
+  var formatDate = dayjs(day.dt_txt).format("MM/DD/YYYY");
+  var date = formatDate;
   var windSpeed = day.wind.speed;
-  var temperature = day.main.temp;
-  var humidity = day.main.humidity;
+  var temperature = day.main.temp + " °";
+  var humidity = day.main.humidity + " %";
   var icon = day.weather[0].icon;
+  var dateSecond = document.createElement("h5");
   var windEl = document.createElement("p");
   var tempEl = document.createElement("p");
   var humEl = document.createElement("p");
   var iconEl = document.createElement("img");
+  dateSecond.textContent = date;
   windEl.textContent = windSpeed;
   tempEl.textContent = temperature;
   humEl.textContent = humidity;
   iconEl.src = "http://openweathermap.org/img/w/" + icon + ".png";
+  dayTwo.appendChild(dateSecond);
   dayTwo.appendChild(windEl);
   dayTwo.appendChild(tempEl);
   dayTwo.appendChild(humEl);
@@ -159,19 +158,24 @@ function extractSecond(data) {
 var dayThree = document.getElementById("3");
 function extractThird(data) {
   dayThree.innerHTML = "";
-  var day = data.list[15];
+  var day = data.list[23];
+  var formatDate = dayjs(day.dt_txt).format("MM/DD/YYYY");
+  var date = formatDate;
   var windSpeed = day.wind.speed;
-  var temperature = day.main.temp;
-  var humidity = day.main.humidity;
+  var temperature = day.main.temp + " °";
+  var humidity = day.main.humidity + " %";
   var icon = day.weather[0].icon;
+  var dateThird = document.createElement("h5");
   var windEl = document.createElement("p");
   var tempEl = document.createElement("p");
   var humEl = document.createElement("p");
   var iconEl = document.createElement("img");
+  dateThird.textContent = date;
   windEl.textContent = windSpeed;
   tempEl.textContent = temperature;
   humEl.textContent = humidity;
   iconEl.src = "http://openweathermap.org/img/w/" + icon + ".png";
+  dayThree.appendChild(dateThird);
   dayThree.appendChild(windEl);
   dayThree.appendChild(tempEl);
   dayThree.appendChild(humEl);
@@ -182,18 +186,23 @@ var dayFour = document.getElementById("4");
 function extractFourth(data) {
   dayFour.innerHTML = "";
   var day = data.list[31];
+  var formatDate = dayjs(day.dt_txt).format("MM/DD/YYYY");
+  var date = formatDate;
   var windSpeed = day.wind.speed;
-  var temperature = day.main.temp;
-  var humidity = day.main.humidity;
+  var temperature = day.main.temp + " °";
+  var humidity = day.main.humidity + " %";
   var icon = day.weather[0].icon;
+  var dateFourth = document.createElement("h5");
   var windEl = document.createElement("p");
   var tempEl = document.createElement("p");
   var humEl = document.createElement("p");
   var iconEl = document.createElement("img");
+  dateFourth.textContent = date;
   windEl.textContent = windSpeed;
   tempEl.textContent = temperature;
   humEl.textContent = humidity;
   iconEl.src = "http://openweathermap.org/img/w/" + icon + ".png";
+  dayFour.appendChild(dateFourth);
   dayFour.appendChild(windEl);
   dayFour.appendChild(tempEl);
   dayFour.appendChild(humEl);
@@ -204,18 +213,23 @@ var dayFive = document.getElementById("5");
 function extractFifth(data) {
   dayFive.innerHTML = "";
   var day = data.list[39];
+  var formatDate = dayjs(day.dt_txt).format("MM/DD/YYYY");
+  var date = formatDate;
   var windSpeed = day.wind.speed;
-  var temperature = day.main.temp;
-  var humidity = day.main.humidity;
+  var temperature = day.main.temp + " °";
+  var humidity = day.main.humidity + " %";
   var icon = day.weather[0].icon;
+  var dateFifth = document.createElement("h5");
   var windEl = document.createElement("p");
   var tempEl = document.createElement("p");
   var humEl = document.createElement("p");
   var iconEl = document.createElement("img");
+  dateFifth.textContent = date;
   windEl.textContent = windSpeed;
   tempEl.textContent = temperature;
   humEl.textContent = humidity;
   iconEl.src = "http://openweathermap.org/img/w/" + icon + ".png";
+  dayFive.appendChild(dateFifth);
   dayFive.appendChild(windEl);
   dayFive.appendChild(tempEl);
   dayFive.appendChild(humEl);
@@ -229,4 +243,18 @@ function weatherConditions(day) {
   var temperature = day.main.temp;
   var humidity = day.main.humidity;
   console.log(date, windSpeed, temperature, humidity);
+}
+
+if (oldList.length > 0) {
+  listSearch = oldList;
+  for (var i = 0; i < listSearch.length; i++) {
+    var oldHistory = document.createElement("button");
+    console.log(oldHistory);
+    oldHistory.innerHTML = listSearch[i];
+    console.log(oldHistory.innerHTML);
+    var addOldButton = document.getElementById("recent-search");
+    addOldButton.appendChild(oldHistory);
+  }
+
+  save.on("click", recent);
 }

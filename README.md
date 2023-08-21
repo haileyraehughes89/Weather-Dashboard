@@ -22,7 +22,7 @@ Enter a city name in the search input field and press "Search."
 The current weather conditions and 5-day forecast for the selected city will be displayed.
 The searched city will be added to the search history.
 Click on a previously serached city in the search history to revisit its weather conditions.
-
+Deployed Application: https://haileyraehughes89.github.io/Weather-Dashboard/
 
 
 https://github.com/haileyraehughes89/Weather-Dashboard/assets/127250721/aa5b4e37-cf7f-431f-b9bf-951cc910a4e1

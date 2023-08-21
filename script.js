@@ -85,6 +85,8 @@ function todaysWeather(currentWeather) {
   var temperature = currentWeather.main.temp + " °";
   var humidity = currentWeather.main.humidity + " %";
   var icon = currentWeather.weather[0].icon;
+  var city = document.createElement("h3");
+  city.textContent = cityName;
   var dateToday = document.createElement("h5");
   var windEL = document.createElement("p");
   var tempEl = document.createElement("p");
@@ -95,7 +97,7 @@ function todaysWeather(currentWeather) {
   tempEl.textContent = temperature;
   humEl.textContent = humidity;
   iconEl.src = "http://openweathermap.org/img/w/" + icon + ".png";
-
+  today.appendChild(city);
   today.appendChild(dateToday);
   today.appendChild(windEL);
   today.appendChild(tempEl);
@@ -106,6 +108,7 @@ var tomorrow = document.getElementById("1");
 function extractFirst(data) {
   tomorrow.innerHTML = "";
   var day = data.list[7];
+
   var formatDate = dayjs(day.dt_txt).format("MM/DD/YYYY");
   var date = formatDate;
   var windSpeed = day.wind.speed;
@@ -249,6 +252,7 @@ if (oldList.length > 0) {
   listSearch = oldList;
   for (var i = 0; i < listSearch.length; i++) {
     var oldHistory = document.createElement("button");
+    oldHistory.className = "button";
     console.log(oldHistory);
     oldHistory.innerHTML = listSearch[i];
     console.log(oldHistory.innerHTML);

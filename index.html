@@ -15,24 +15,29 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Weather Dashboard</h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-light fs-1" href="#">Weather Dashboard</a>
+      </div>
+    </nav>
+
     <main>
       <section class="search">
         <input type="text" class="form-control" id="input" placeholder="City" />
         <button type="button" class="btn btn-primary btn-lg">Search</button>
-        <ul id="recent-search"></ul>
+        <ul type="button" id="recent-search"></ul>
       </section>
 
-      <section class="">
+      <section class="reports">
         <div>
           <div id="weather">Today's Weather</div>
 
           <div id="future">
-            <div class="future-day" id="1">Future 1</div>
-            <div class="future-day" id="2">Future 2</div>
-            <div class="future-day" id="3">Future 3</div>
-            <div class="future-day" id="4">Future 4</div>
-            <div class="future-day" id="5">Future 5</div>
+            <div class="future-day" id="1"></div>
+            <div class="future-day" id="2"></div>
+            <div class="future-day" id="3"></div>
+            <div class="future-day" id="4"></div>
+            <div class="future-day" id="5"></div>
           </div>
         </div>
       </section>
